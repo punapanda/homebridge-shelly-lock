@@ -4,7 +4,7 @@
 
 <span align="center">
 
-# homebridge-web-lock
+# homebridge-shelly-lock
 
 [![npm](https://img.shields.io/npm/v/homebridge-web-lock.svg)](https://www.npmjs.com/package/homebridge-web-lock) [![npm](https://img.shields.io/npm/dt/homebridge-web-lock.svg)](https://www.npmjs.com/package/homebridge-web-lock)
 
@@ -12,13 +12,14 @@
 
 ## Description
 
-This [homebridge](https://github.com/homebridge/homebridge) plugin exposes a Shelly-based lock to Apple's [HomeKit](http://www.apple.com/ios/home/). Using HTTP requests, you can open/close the lock and update the plugin with the lock's current state. The plugin achieves this by setting up a listen server which listens for changes in state from your device and then feeds them real-time into HomeKit.
+This [homebridge](https://github.com/homebridge/homebridge) plugin exposes a Shelly-based lock to Apple's [HomeKit](http://www.apple.com/ios/home/). Using HTTP requests, you can open/close the lock and update the plugin with the lock's current state. The plugin achieves this by setting up a listen server which listens for changes in state from your Shelly and then feeds them real-time into HomeKit. Proper functionality requires you to set up webhooks for output actions. Currently only tested with a Shelly Uni.
 
 ## Installation
 
 1. Install [homebridge](https://github.com/homebridge/homebridge#installation)
 2. Install this plugin: `npm install -g homebridge-web-lock`
 3. Update your `config.json`
+4. Update your Shelly configuration
 
 ## Configuration
 
