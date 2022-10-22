@@ -14,7 +14,8 @@ function HTTPLock (log, config) {
   this.log = log
 
   this.name = config.name
-  this.apiroute = config.apiroute
+  this.shellyIp = config.shellyIp
+  this.shellyChannel = config.shellyChannel
   this.pollInterval = config.pollInterval || 300
 
   this.port = config.port || 2000
@@ -72,7 +73,7 @@ HTTPLock.prototype = {
   },
 
   _getStatus: function (callback) {
-    const url = this.apiroute + '/status'
+    const url = this.shellyIp + '/' + this.shellyChannel
     this.log.debug('Getting status: %s', url)
     this._httpRequest(url, '', 'GET', function (error, response, responseBody) {
       if (error) {
@@ -83,10 +84,10 @@ HTTPLock.prototype = {
         this.log.debug('Device response: %s', responseBody)
         try {
           const json = JSON.parse(responseBody)
-          this.service.getCharacteristic(Characteristic.LockCurrentState).updateValue(json.lockCurrentState)
-          this.log.debug('Updated lockCurrentState to: %s', json.lockCurrentState)
-          this.service.getCharacteristic(Characteristic.LockTargetState).updateValue(json.lockTargetState)
-          this.log.debug('Updated lockTargetState to: %s', json.lockTargetState)
+          this.service.getCharacteristic(Characteristic.LockCurrentState).updateValue(json.ison)
+          this.log.debug('Updated lockCurrentState to: %s', json.ison)
+          //this.service.getCharacteristic(Characteristic.LockTargetState).updateValue(json.lockTargetState)
+          //this.log.debug('Updated lockTargetState to: %s', json.lockTargetState)
           callback()
         } catch (e) {
           this.log.warn('Error parsing status: %s', e.message)
@@ -131,14 +132,15 @@ HTTPLock.prototype = {
   },
 
   setLockTargetState: function (value, callback) {
-    const url = this.apiroute + '/setLockTargetState?value=' + value
-    this.log.debug('Setting lockTargetState: %s', url)
+    if(value == 0) { targetString = 'off' } else if(value == 1) { targetString = 'on'}
+    const url = this.shellyIp + '/' + this.shellyChannel + '?turn=' + targetString
+    this.log.debug('Setting lock output: %s', url)
     this._httpRequest(url, '', this.http_method, function (error, response, responseBody) {
       if (error) {
-        this.log.warn('Error setting lockTargetState: %s', error.message)
+        this.log.warn('Error setting lock output: %s', error.message)
         callback(error)
       } else {
-        this.log('Set lockTargetState to: %s', value)
+        this.log('Set lock output to ' + targetString)
         if (value === 0 && this.autoLock) {
           this.autoLockFunction()
         }
