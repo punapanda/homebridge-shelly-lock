@@ -73,7 +73,7 @@ HTTPLock.prototype = {
   },
 
   _getStatus: function (callback) {
-    const url = this.shellyIp + '/' + this.shellyChannel
+    const url = this.shellyIp + '/relay/' + this.shellyChannel
     this.log.debug('Getting status: %s', url)
     this._httpRequest(url, '', 'GET', function (error, response, responseBody) {
       if (error) {
