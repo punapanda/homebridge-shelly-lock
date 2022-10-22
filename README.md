@@ -6,8 +6,6 @@
 
 # homebridge-shelly-lock
 
-[![npm](https://img.shields.io/npm/v/homebridge-web-lock.svg)](https://www.npmjs.com/package/homebridge-web-lock) [![npm](https://img.shields.io/npm/dt/homebridge-web-lock.svg)](https://www.npmjs.com/package/homebridge-web-lock)
-
 </span>
 
 ## Description
