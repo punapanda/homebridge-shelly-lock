@@ -12,7 +12,7 @@
 
 ## Description
 
-This [homebridge](https://github.com/homebridge/homebridge) plugin exposes a web-based lock to Apple's [HomeKit](http://www.apple.com/ios/home/). Using HTTP requests, you can open/close the lock and update the plugin with the lock's current state. The plugin achieves this by setting up a listen server which listens for changes in state from your device and then feeds them real-time into HomeKit.
+This [homebridge](https://github.com/homebridge/homebridge) plugin exposes a Shelly-based lock to Apple's [HomeKit](http://www.apple.com/ios/home/). Using HTTP requests, you can open/close the lock and update the plugin with the lock's current state. The plugin achieves this by setting up a listen server which listens for changes in state from your device and then feeds them real-time into HomeKit.
 
 ## Installation
 
